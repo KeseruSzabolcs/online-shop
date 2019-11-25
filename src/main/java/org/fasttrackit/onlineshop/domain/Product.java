@@ -15,9 +15,9 @@ public class Product {
     @NotNull
     private String name;
     @NotNull
-    private double price;
+    private Double price;
     @NotNull
-    private int quantity;
+    private Integer quantity;
     private String imageUrl;
 
     public long getId() {
@@ -44,21 +44,6 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -66,6 +51,22 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override
