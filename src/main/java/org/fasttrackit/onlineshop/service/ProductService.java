@@ -1,6 +1,7 @@
 package org.fasttrackit.onlineshop.service;
 
 import org.fasttrackit.onlineshop.domain.Product;
+import org.fasttrackit.onlineshop.exception.ResourceNotFoundException;
 import org.fasttrackit.onlineshop.persistance.ProductRepository;
 import org.fasttrackit.onlineshop.transfer.SaveProductRequest;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
 
     // IoC - Inversion of Control
     private final ProductRepository productRepository;
@@ -22,7 +23,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.clas
         this.productRepository = productRepository;
     }
 
-    public Product createProduct(SaveProductRequest request){
+    public Product createProduct(SaveProductRequest request) {
         LOGGER.info("Creating product {}", request);
         Product product = new Product();
         product.setDescription(request.getDescription());
@@ -33,4 +34,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.clas
 
         return productRepository.save(product);
     }
+
+
+    public Product getProduct(long id) {
+        LOGGER.info("Retrieving product {}", id);
+
+
+        //using Optional
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Product " + id + " does not exist."));
+    }
 }
+
